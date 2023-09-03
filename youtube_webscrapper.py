@@ -52,7 +52,7 @@ title = driver \
     .text
 
 #Dictionary that stores channel info
-channelInfo = {}
+channel = {}
 
 #scrape the channel info attributes
 channel_element = driver \
@@ -74,10 +74,24 @@ channel_subs = channel_element \
         .text \
             .replace(' subscribers', '')
 
-channelInfo['url'] = channel_url
-channelInfo['name'] = channel_name
-channelInfo['image'] = channel_image
-channelInfo['subs'] = channel_subs
+channel['url'] = channel_url
+channel['name'] = channel_name
+channel['image'] = channel_image
+channel['subs'] = channel_subs
+
+infoContainerElements = driver \
+    .find_element(By.CSS_SELECTOR, '#info-container span') 
+views = infoContainerElements[0] \
+    .text \
+        .replace(' views', '')
+likes = driver \
+    .find_element(By.ID, 'segmented-like-button') \
+        .text
+video['url'] = url
+video['title'] = title
+video['channel'] = channel
+video['views'] = views
+video['likes'] = likes
 
 #close the browser and free up the resources
 driver.quit()

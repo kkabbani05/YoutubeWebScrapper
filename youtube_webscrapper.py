@@ -7,6 +7,7 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.by import By
 from selenium.common import TimeoutException
+import json
 
 #initialize a web driver instance to control a chrom window in headless mode
 options = Options()
@@ -95,3 +96,7 @@ video['likes'] = likes
 
 #close the browser and free up the resources
 driver.quit()
+
+#export the scraped data to a JSON file
+with open('video.json', 'w') as file:
+    json.dump(video, file, indent=4)
